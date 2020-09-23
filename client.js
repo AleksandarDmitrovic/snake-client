@@ -21,6 +21,11 @@ const connect = function() {
     conn.write("Name: AD");
   });
 
+  // conn.on('connect', () => {  // Continually moves snake up once connected to the server
+  //   setInterval(() => {
+  //     conn.write("Move: up");
+  //   }, 50);
+  // });
 
   conn.on('data', (data) => {
     console.log('you died cuz you idled');
