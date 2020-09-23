@@ -17,6 +17,10 @@ const connect = function() {
     console.log("Successfully connected to game server");
   });
 
+  conn.on('connect', () => {
+    conn.write("Name: AD");
+  });
+
 
   conn.on('data', (data) => {
     console.log('you died cuz you idled');
