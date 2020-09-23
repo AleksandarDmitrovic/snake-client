@@ -6,8 +6,8 @@ const net = require('net');
  */
 const connect = function() {
   const conn = net.createConnection({
-    host: 'localhost', //<IP ADDRESS HERE>
-    port: 50541
+    host: '135.23.222.131', //<IP ADDRESS HERE> 'local host for local' 135.23.222.131
+    port: 50542 // 50541 local port  - 50542 lighthouse port
   });
 
   // interpret incoming data as text
@@ -15,17 +15,14 @@ const connect = function() {
 
   conn.on('connect', () => {
     console.log("Successfully connected to game server");
-  });
-
-  conn.on('connect', () => {
     conn.write("Name: AD");
+    setTimeout(() => {
+      conn.write("Say: mine");
+    }, 3000);
+    setTimeout(() => {
+      conn.write("Say: yum");
+    }, 7000);
   });
-
-  // conn.on('connect', () => {  // Continually moves snake up once connected to the server
-  //   setInterval(() => {
-  //     conn.write("Move: up");
-  //   }, 50);
-  // });
 
   conn.on('data', (data) => {
     console.log('you died cuz you idled');
