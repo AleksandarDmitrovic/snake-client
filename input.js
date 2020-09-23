@@ -1,7 +1,14 @@
 const { stdin } = require('process');
 
+const { movementCommands, messageCommands } = require('./constants');
 
 let connection;
+let moveCommand = function(key) {
+  return movementCommands[key]
+}
+let messageCommand = function(key) {
+  return messageCommands[key]
+}
 /**
  * Setup User Interface 
  * Specifically, so that we can handle user input via stdin
@@ -18,18 +25,16 @@ const setupInput = function(conn) {
 
 const handleUserInput = ('data', (key) => {
     // \u0003 maps to ctrl+c input
+    let direction = moveCommand(key);
+    let messages = messageCommand(key);
     if (key === '\u0003') { // '\\q\n'
       process.exit();
-    } else if (key === 'w') {
-      connection.write('Move: up'); 
-    } else if (key === 's') {
-      connection.write('Move: down');
-    } else if (key === 'd') {
-      connection.write('Move: right');
-    } else if (key === 'a') {
-      connection.write('Move: left');
-    } else if (key === ' ') {
-      connection.write('Say: yum');
+    } 
+    if(direction) {
+      connection.write(`Move: ${direction}`)
+    }
+    if (messages) {
+      connection.write(`Say: ${messages}`);
     }
   });
 

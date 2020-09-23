@@ -1,13 +1,15 @@
 const { error } = require('console');
 const net = require('net');
 
+const { IP, PORT } = require('./constants');
+
 /**
  * Establishes connection with the game server
  */
 const connect = function() {
   const conn = net.createConnection({
-    host: '135.23.222.131', //<IP ADDRESS HERE> 'local host for local' 135.23.222.131
-    port: 50542 // 50541 local port  - 50542 lighthouse port
+    host: IP, //<IP ADDRESS HERE> 'local host for local' 135.23.222.131
+    port: PORT // 50541 local port  - 50542 lighthouse port
   });
 
   // interpret incoming data as text
